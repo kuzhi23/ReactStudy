@@ -1,18 +1,36 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
+
+function reducer(state, action) {
+  console.log(state);
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      if (state <= 0) {
+        return 0;
+      } else {
+        return state - 1;
+      }
+
+    default:
+      throw new Error("Unhandled action");
+  }
+}
 
 function Counter() {
-  const [number, setNumber] = useState(0);
-
+  const [number, dispatch] = useReducer(reducer, 0);
   const onIncrease = () => {
     // setNumber(number + 1);
-    setNumber((prevNumber) => prevNumber + 1);
+    dispatch({
+      type: "INCREMENT",
+    });
   };
   const onDecrease = () => {
-    if (number <= 0) {
-      setNumber(0);
-    } else {
-      setNumber(number - 1);
+    if (number < 0) {
     }
+    dispatch({
+      type: "DECREMENT",
+    });
   };
 
   return (
