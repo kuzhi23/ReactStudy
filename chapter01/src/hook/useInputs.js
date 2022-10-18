@@ -1,7 +1,6 @@
 import { useState, useCallback, useReducer } from "react";
 
 function reducer(state, action) {
-  console.log(state);
   switch (action.type) {
     case "CANGE_INPUT":
       return {
