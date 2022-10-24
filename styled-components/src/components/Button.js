@@ -1,6 +1,23 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { darken, lighten } from 'polished';
+import React from "react";
+import styled, { css } from "styled-components";
+import { darken, lighten } from "polished";
+
+const fullWidthStyle = css`
+  ${(props) => {
+    console.log(props.fullWidth);
+    return (
+      props.fullWidth &&
+      css`
+        width: 100%;
+        justify-content: center;
+        & + & {
+          margin-left: 0;
+          margin-top: 1rem;
+        }
+      `
+    );
+  }}
+`;
 
 const colorStyles = css`
   ${({ theme, color }) => {
@@ -30,16 +47,16 @@ const colorStyles = css`
 
 const sizes = {
   large: {
-    height: '3rem',
-    fontSize: '1.25rem',
+    height: "3rem",
+    fontSize: "1.25rem",
   },
   medium: {
-    height: '2.25rem',
-    fontSize: '1rem',
+    height: "2.25rem",
+    fontSize: "1rem",
   },
   small: {
-    height: '1.75rem',
-    fontSize: '0.875rem',
+    height: "1.75rem",
+    fontSize: "0.875rem",
   },
 };
 
@@ -48,19 +65,6 @@ const sizeStyles = css`
     height: ${sizes[size].height};
     font-size: ${sizes[size].fontSize};
   `}
-`;
-
-const fullWidthStyle = css`
-  ${(props) =>
-    props.fullWidth &&
-    css`
-      width: 100%;
-      justify-content: center;
-      & + & {
-        margin-left: 0;
-        margin-top: 1rem;
-      }
-    `}
 `;
 
 const StyledButton = styled.button`
@@ -77,16 +81,15 @@ const StyledButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
 
-  /* 기타 */
-  & + & {
-    margin-left: 1rem;
-  }
-
   /* 크기 */
   ${sizeStyles}
 
   /* 색상 */
   ${colorStyles}
+
+  & + & {
+    margin-left: 1rem;
+  }
 
   ${fullWidthStyle}
 `;
@@ -106,8 +109,8 @@ function Button({ children, color, size, outline, fullWidth, ...rest }) {
 }
 
 Button.defaultProps = {
-  color: 'blue',
-  size: 'medium',
+  color: "blue",
+  size: "medium",
 };
 
 export default Button;
