@@ -4,6 +4,7 @@ import { getUser, useUsersDispatch, useUsersState } from "./UsersContext.jsx";
 function User({ id }) {
   const state = useUsersState();
   const dispatch = useUsersDispatch();
+
   useEffect(() => {
     getUser(dispatch, id);
   }, [dispatch, id]);
