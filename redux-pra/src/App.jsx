@@ -8,6 +8,19 @@ function App() {
       <CounterContainer />
       <hr />
       <TodosContainer />
+      <div
+        style={{
+          margin: "16px",
+          padding: "4px",
+          width: "46px",
+          background: "black",
+          color: "white",
+          fontSize: "8px",
+          borderRadius: "2px",
+        }}
+      >
+        강아지 정보
+      </div>
     </div>
   );
 }
