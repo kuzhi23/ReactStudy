@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { logger } from "redux-logger/src";
 import { composeWithDevTools } from "redux-devtools-extension";
 import ReduxThunk from "redux-thunk";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const store = createStore(
   rootReducer,
@@ -15,9 +16,9 @@ const store = createStore(
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <React.StrictMode>
+  <Router>
+    <Provider store={store}>
       <App />
-    </React.StrictMode>
-  </Provider>
+    </Provider>
+  </Router>
 );

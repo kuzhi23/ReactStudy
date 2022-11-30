@@ -14,7 +14,7 @@ const posts = [
     body: "redux-thunk를 직접 만들어 보면 이해하기가 쉽다.",
   },
   {
-    id: 1,
+    id: 3,
     title: "redux-saga 미들웨를 배워 봅시다.",
     body: "redux-saga 미들웨어를 직접 만들어 보면 이해하기가 쉽다.",
   },
@@ -25,7 +25,7 @@ export const getPosts = async () => {
   return posts;
 };
 
-export const getPostById = async () => {
+export const getPostById = async (id) => {
   await sleep(500);
   return posts.find((post) => post.id === id);
 };

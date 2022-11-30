@@ -1,3 +1,52 @@
+export const createPromiseThunk = (type, promiseCreator) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+
+  const thunkCreator = (param) => async (dispatch) => {
+    dispatch({ type });
+    try {
+      const payload = await promiseCreator(param);
+      dispatch({
+        type: SUCCESS,
+        payload,
+      });
+    } catch (e) {
+      dispatch({
+        type: ERROR,
+        payload: e,
+        error: true,
+      });
+    }
+  };
+
+  return thunkCreator;
+};
+
+export const handleActions = (type, key, keepData) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  return (state, action) => {
+    console.log(action);
+    switch (action.type) {
+      case type:
+        return {
+          ...state,
+          [key]: reducerUtils.loading(keepData ? state[key].data : null),
+        };
+      case SUCCESS:
+        return {
+          ...state,
+          [key]: reducerUtils.success(action.payload),
+        };
+      case ERROR:
+        return {
+          ...state,
+          [key]: reducerUtils.error(action.payload),
+        };
+      default:
+        return state;
+    }
+  };
+};
+
 export const reducerUtils = {
   initial: (data = null) => ({
     data,
